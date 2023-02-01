@@ -6,12 +6,16 @@ import Home from './Routes/Home';
 import Details from './Routes/Details';
 import Portfolio from './pages/Portfolio';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
   return (
 
       <>
     <BrowserRouter>
+    <ToastContainer/>
     <Navbar/>
     <Routes>
      <Route path='/' element={<Home/>} />

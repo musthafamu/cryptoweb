@@ -43,7 +43,7 @@ function Slider({item}) {
     ))
   return (
     <div>
- <AliceCarousel responsive={responsive} disableButtonsControls animationDuration={1000} infinite autoPlayInterval={2500} autoPlay disableSlideInfo disableDotsControls mouseTracking items={items} />
+ <AliceCarousel responsive={responsive} disableButtonsControls animationDuration={1000} infinite autoPlayInterval={2500} autoPlay disableSlideInfo disableDotsControls  items={items} />
 
     </div>
   )

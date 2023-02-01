@@ -1,12 +1,14 @@
 import { createSlice,createAsyncThunk } from '@reduxjs/toolkit';
 import axios from "axios"
+import { toast } from 'react-toastify';
+
 
 const initialState = {
     data:[],
     more:20,
-    portfolio:[],
-
+    portfolio:localStorage.getItem('portfolio')?JSON.parse(localStorage.getItem('portfolio')):[],
     status:null,
+    toggle:true
   }
 
 
@@ -18,17 +20,38 @@ const initialState = {
       return res?.data
     }
   )
-
 const cryptoSlice=createSlice({
     name:'crypto',
     initialState,
     reducers:{ 
       Showmore:(state)=>{
-        state.more +=20
+    state.more +=20
       },
       Add:(state,action)=>{
-       state.portfolio.push(action.payload)
+        const exist=state.portfolio.some((item)=>item.coin.id==action.payload.coin.id)
+         if(exist){
+          toast.info(`${action.payload.coin.symbol} alreday`,{
+            position:"bottom-left"
+          })
+          }else{
+           state.portfolio.push(action.payload)
+         toast.info(`${action.payload.coin.symbol} Added to portfolio`,{
+          position:"bottom-left"
+         })
+        
+
+           localStorage.setItem("portfolio",JSON.stringify(state.portfolio))
+         }
+
       },
+      Sell:(state,action)=>{
+       state.portfolio=state.portfolio.filter((item)=>item.coin.id!==action.payload.id)
+       localStorage.setItem("portfolio",JSON.stringify(state.portfolio))
+       toast.info(` Remove from portfolio`,{
+        position:"bottom-left"
+       })
+      },
+      
       
     },
     extraReducers:{
@@ -44,8 +67,6 @@ const cryptoSlice=createSlice({
 }
 
     }
-
-
 })
-export const {Showmore,Add}=cryptoSlice.actions
+export const {Showmore,Add,Sell,toggle}=cryptoSlice.actions
 export default cryptoSlice.reducer

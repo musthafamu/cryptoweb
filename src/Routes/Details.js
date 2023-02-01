@@ -10,9 +10,10 @@ import { Add } from '../redux/Cryptoslice'
 
 function Details() {
   const param=useParams()
+  const {toggle}=useSelector((state)=>state.crypto)
+  console.log(toggle)
 
   const dispatch=useDispatch()
-  
   
 const [coin,setcoin]=useState({})
 const [quantity,setquantity]=useState()
@@ -28,8 +29,10 @@ console.log(coin)
   },[])
 
   const addding=(coin)=>{
-    dispatch(Add({quantity,coin})) 
-  
+    if(quantity >=1){
+
+      dispatch(Add({quantity,coin})) 
+    }
   }
    const change=(e)=>{
     setquantity(e.target.value)
@@ -89,13 +92,10 @@ console.log(coin)
   <div className='md:flex md:justify-center   md:h-[300px] shadow-sm'>
       <div>
         <Link to='/'>
-
-      <button className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Button</button>
+      <button className="inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Home</button>
         </Link>
-
      <Link to='/portfolio'>
      <button  className=" ml-4 px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Portfolio</button>
-
      </Link>
      <div className='flex items-center mt-4'>
    <input onChange={change} className="shadow w-[70px]  border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  type="number" placeholder="Qty" />  

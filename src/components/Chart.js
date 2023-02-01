@@ -18,7 +18,7 @@ import {
   
   ChartJS.register(
     CategoryScale,
-    LinearScale,
+     LinearScale,
     PointElement,
     LineElement,
     Title,
