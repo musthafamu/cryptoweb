@@ -30,7 +30,7 @@ const cryptoSlice=createSlice({
       Add:(state,action)=>{
         const exist=state.portfolio.some((item)=>item.coin.id==action.payload.coin.id)
          if(exist){
-          toast.info(`${action.payload.coin.symbol} alreday`,{
+          toast.info(`${action.payload.coin.symbol} Alreday added`,{
             position:"bottom-left"
           })
           }else{
@@ -47,7 +47,7 @@ const cryptoSlice=createSlice({
       Sell:(state,action)=>{
        state.portfolio=state.portfolio.filter((item)=>item.coin.id!==action.payload.id)
        localStorage.setItem("portfolio",JSON.stringify(state.portfolio))
-       toast.info(` Remove from portfolio`,{
+       toast.info(` Removed from portfolio`,{
         position:"bottom-left"
        })
       },
